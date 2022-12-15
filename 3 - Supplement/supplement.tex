@@ -300,19 +300,20 @@ y_{ctk} &= {W}_{ct} + \beta_c^F k + \epsilon_{ctk} \\
 y_{ctk} &= {W}_{ct} + \beta_c^R k + \epsilon_{ctk} 
 \end{align}
 
-where \(y_{ct}\) was mortality per 100,000 population in week \(t\) of
+where \(y_{ctk}\) was mortality per 100,000 population in week \(t\) of
 year \(k\) in location \(c\), \({W}_{ct}\) was a week-location fixed
 effect, \(k\) indicated year, and \(\epsilon_{ctk}\) was residual error.
 Country-specific linear trend parameters \(\beta_c^F\) were estimated as
 fixed effects while \(\beta_c^R\) were estimated as random effects. We
 considered both models fit on all data and models fit separately on the
-set of weeks in each period.
+set of weeks in each period (delta: 26-51 and omicron: 52-53, 1-12).
 
 We first used 2018 and 2019 as test data. We fit models (1)-(3) on data
 from 2015-2017, predicting out-of-sample mortality for each country-week
 in 2018, and 2015-2018, predicting out-of-sample mortality in 2019. We
-estimated root mean-squared error for each period of weeks
-(\(\mathcal{P}\)) and test year (K) at the week-level
+estimated root mean-squared error for each period of weeks (delta: 26-51
+and omicron: 52-53, 1-12) (\(\mathcal{P}\)) and test year (K) at the
+week-level
 \(\left(RMSE_{\mathcal{P}, K} = \sqrt{\frac{1}{N_c} \sum_{c \in \mathcal{C}} \sum_{t \in \mathcal{P}} \left(y_{ctK}-\hat{y}_{ctK}\right)^2}\right)\)
 and at the period-level
 \(\left(RMSE_{\mathcal{P}, K}^{CP} = \sqrt{\frac{1}{N_c} \sum_{c \in \mathcal{C}} \left(\sum_{t \in \mathcal{P}} \left(y_{ctK}-\hat{y}_{ctK}\right)\right)^2}\right)\).
@@ -326,9 +327,9 @@ Second, we fit models for data from 2015-2017, and predicted 2019 to
 approximate 2021 with only 2019 pre-intervention data. (We did not want
 to fit trend models on only 2 years of pre-pandemic data and therefore
 did not use 2018 as a test year.) Model (3) continued to outperform
-other models overall; for \(RMSE^{CP}\) during Period 3, model (2)
+other models overall; for \(RMSE^{CP}\) during omicron weeks, model (2)
 estimated on all pre-intervention data slightly outperformed model (3),
-but the magnitude of the differences were negligible. We therefore used
+but the magnitude of the difference was negligible. We therefore used
 model (3) estimated over all weeks combined as our main specification.
 See
 \href{https://github.com/abilinski/ExcessMortalityDeltaOmicron}{GitHub}
@@ -361,7 +362,7 @@ used standard Wald tests to evaluate statistical significance.
 Per the model-fitting process described above, we modeled excess
 all-cause mortality: \begin{align*}
 y_{ctk} &= \sum_{j \in \mathcal{C}} \sum_{w \in \mathcal{W}} \sum_{\ell \geq 2020} \beta_{jw\ell} \mathbb{I}\{c=j \cap t = w \cap k = \ell\} + {W}_{ct} + \beta_c^R k + \epsilon_{ctk},
-\end{align*} where \(y_{ct}\) was mortality per 100,000 population in
+\end{align*} where \(y_{ctk}\) was mortality per 100,000 population in
 week \(t\) of year \(k\) in location \(c\), \({W}_{ct}\) was a
 location-week fixed effect, and \(k\) indicated year. We estimated
 \(\beta_c^R\) as a random effect. Week-level treatment effects were

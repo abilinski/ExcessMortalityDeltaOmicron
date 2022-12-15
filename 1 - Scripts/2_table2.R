@@ -74,7 +74,8 @@ table(out2$n)
 # process data
 out3 = out2 %>% mutate(est = paste(var, type)) %>%
   group_by(Country, est, id, YEAR) %>% summarize(mse_tot = sum(mse), err = abs(sum(err))) %>%
-  group_by(Country, id, YEAR) %>% mutate(rank_mse = rank(mse_tot), rank_err = rank(err))
+  group_by(Country, id, YEAR) %>% mutate(rank_mse = rank(mse_tot), rank_err = rank(err)) %>%
+  mutate(id = ifelse(id=="Per2", "Delta weeks (26-51)", "Omicron weeks (52-53, 1-12)"))
   
 temp = out3 %>% group_by(id, est, YEAR) %>% summarize(rmse = sqrt(mean(mse_tot)),
                                                rmse_c = mean(sqrt(mse_tot)),
@@ -89,7 +90,7 @@ ggplot(temp, aes(x = reorder(est, value), y = value, fill = factor(paste(YEAR, i
   geom_text(aes(label = round(value,1)), size = 3,
             position=position_stack(vjust=0.5)) + 
   theme_bw() +
-  scale_fill_brewer("Year", palette = "Set2") + 
+  scale_fill_brewer("Test Year & Weeks", palette = "Set2") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   labs(x = "", y = "")
 
@@ -103,19 +104,20 @@ out = bind_rows(test_function(c3, weeks = weeks1, test_weeks = weeks1, test_year
 # make plots
 out_2 = out %>% mutate(est = paste(var, type)) %>%
   group_by(Country, est, id, YEAR) %>% summarize(mse_tot = sum(mse), err = abs(sum(err))) %>%
-  group_by(Country, id, YEAR) %>% mutate(rank_mse = rank(mse_tot), rank_err = rank(err)) %>%
+  group_by(Country, id, YEAR) %>% mutate(rank_mse = rank(mse_tot), rank_err = rank(err),
+                                         id = ifelse(id=="Per2", "Delta weeks (26-51)", "Omicron weeks (52-53, 1-12)")) %>%
   group_by(id, est, YEAR) %>% summarize(rmse = sqrt(mean(mse_tot)),
                                         rmse_c = mean(sqrt(mse_tot)),
                                         rmse_cp = sqrt(mean(err^2)), mean_rank_mse = mean(rank_mse),
                                         mean_rank_err = mean(rank_err)) %>%
-  gather(var, value, rmse, rmse_cp, mean_rank_mse)
+  gather(var, value, rmse, rmse_cp, mean_rank_mse) 
 
 ggplot(out_2, aes(x = reorder(est, value), y = value, fill = factor(id))) + geom_bar(stat = "identity", position = "stack") + 
   facet_wrap(.~var, scales = "free") + 
   geom_text(aes(label = round(value,1)), size = 3,
             position=position_stack(vjust=0.5)) + 
   theme_bw() +
-  scale_fill_brewer("Year", palette = "Set2") + 
+  scale_fill_brewer("Test Weeks", palette = "Set2") + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   labs(x = "", y = "")
 
@@ -136,8 +138,8 @@ save(lm3.5, file = here("2 - Output", "lm_output.RData"))
 load(here("2 - Output", "lm_output.RData"))
 
 # estimate table 2 with a given functional form
-year_week1 = paste("2021", 26:51, sep = "-")
-year_week2 = c(paste("2021", 52:53, sep = "-"), paste("2022",  c(paste("0", 1:9, sep = ""), 10:12), sep = "-"))
+year_week1 = c(paste("2020", 12:53, sep = "-"), paste("2021",  paste("0", 1:9, sep = ""), sep = "-"), paste("2021", 10:25, sep = "-"))
+year_week2 = c(paste("2021", 26:53, sep = "-"), paste("2022",  c(paste("0", 1:9, sep = ""), 10:12), sep = "-"))
 
 est_preds = function(lm3 = lm3){
   # run predictions for Period 2
@@ -163,8 +165,8 @@ est_preds = function(lm3 = lm3){
     group_by(per) %>%
     filter(Country!="United States") %>%
     mutate(value2 = pred[Country=="USA2"] - pred,
-           v2 = paste(comma(round(value2*pop/100000)), " (", round(value2/pred[Country=="USA2"], 2), ")",  sep = ""),
-           v1 = round(pred, 3)) %>%
+           v2 = paste(comma(round(value2*pop/100000)), " (", round(value2/pred[Country=="USA2"]*100), ")",  sep = ""),
+           v1 = round(pred, 1)) %>%
     ungroup() %>%
     dplyr::select(-value2, -pred) %>%
     gather(var_new, value_new, v1, v2) %>%
@@ -183,7 +185,8 @@ est_preds = function(lm3 = lm3){
 # table 2
 tbl2 = est_preds(lm3) %>% mutate(model = "RF")
 tbl2_out = tbl2[,c(1,11,2:7)]
-write.csv(tbl2_out, file = here("2 - Output", "tbl2_out.csv"))
+View(tbl2_out)
+write.csv(tbl2_out, file = here("2 - Output", "tbl2_out_full_pandemic.csv"))
 
 # table 2 - FE
 lm3_FE = lm(Value~Country*WEEK + YEAR*Country, 

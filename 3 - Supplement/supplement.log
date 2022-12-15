@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.30)  17 NOV 2022 07:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.30)  17 NOV 2022 15:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**supplement_5_oct_2022.tex
-(./supplement_5_oct_2022.tex
+**supplement.tex
+(./supplement.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex
 /base/article.cls
@@ -611,8 +611,8 @@ File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count323
 \l__pdf_internal_box=\box73
-) (./supplement_5_oct_2022.aux)
-\openout1 = `supplement_5_oct_2022.aux'.
+) (./supplement.aux)
+\openout1 = `supplement.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
 LaTeX Font Info:    ... okay on input line 147.
@@ -819,20 +819,9 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.91925pt on input line 216.
 [1
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 1400) in paragraph at lines 311--324
-\T1/ppl/m/n/10 (+20) out-of-sample mor-tal-ity for each country-week in 2018, a
-nd 2015-2018, pre-dict-ing out-of-sample
- []
-
-
-Underfull \hbox (badness 3471) in paragraph at lines 311--324
-\T1/ppl/m/n/10 (+20) year (K) at the week-level $[]$ and at the period-level
- []
-
-[2]
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
-351.
+352.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 )
@@ -840,15 +829,15 @@ File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
 Package caption Warning: Unused \captionsetup[figure] on input line 106.
 See the caption package documentation for explanation.
 
-[3] (./supplement_5_oct_2022.aux) ) 
+[3] (./supplement.aux) ) 
 Here is how much of TeX's memory you used:
  19450 strings out of 478268
- 316547 string characters out of 5846347
- 662721 words of memory out of 5000000
+ 316426 string characters out of 5846347
+ 662699 words of memory out of 5000000
  37077 multiletter control sequences out of 15000+600000
  553550 words of font info for 261 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,11n,77p,1210b,426s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,77p,1199b,426s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
@@ -864,7 +853,7 @@ f-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2022/texmf-di
 st/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1
 /urw/palatino/uplri8a.pfb>
-Output written on supplement_5_oct_2022.pdf (3 pages, 118061 bytes).
+Output written on supplement.pdf (3 pages, 118105 bytes).
 PDF statistics:
  133 PDF objects out of 1000 (max. 8388607)
  105 compressed objects within 2 object streams
